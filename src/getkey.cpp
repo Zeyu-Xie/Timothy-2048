@@ -1,8 +1,8 @@
-#include "../include/getkey.hpp"
-
 #include <cstdio>
 #include <termios.h>
 #include <unistd.h>
+
+#include "../include/getkey.hpp"
 
 int getkey()
 {

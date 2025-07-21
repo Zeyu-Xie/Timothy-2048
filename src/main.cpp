@@ -1,14 +1,9 @@
-#include <iostream>
-#include <termios.h>
-#include <vector>
-
 #include "../include/characters.hpp"
+#include "../include/clearConsole.hpp"
 #include "../include/GameBoard.hpp"
 #include "../include/getkey.hpp"
-#include "../include/clearConsole.hpp"
 
 const int N = 4;
-
 GameBoard gb(N);
 
 int main()
@@ -44,4 +39,6 @@ int main()
             break;
         }
     }
+
+    return 0;
 }

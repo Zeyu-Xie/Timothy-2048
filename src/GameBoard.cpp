@@ -1,7 +1,7 @@
-#include "../include/GameBoard.hpp"
-
 #include <iomanip>
 #include <tuple>
+
+#include "../include/GameBoard.hpp"
 
 // Constructor
 GameBoard::GameBoard(int n) : N(n), array(n, VINT(n, 0)) {}
