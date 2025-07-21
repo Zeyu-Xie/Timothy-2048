@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <ctime>
+#include <unistd.h>
 
 #include "../include/characters.hpp"
 #include "../include/clearConsole.hpp"
@@ -73,7 +74,15 @@ int game()
 
 int main()
 {
+    // Program start animation
+    clear_console();
+    std::cout << "Welcome to Timothy-2048. \u00A9 Zeyu Xie." << std::flush;
+    sleep(3);
+    clear_console();
+
+    // Run the game function
     int steps = game();
     std::cout << steps << std::endl;
+
     return 0;
 }
