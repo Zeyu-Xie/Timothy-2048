@@ -1,11 +1,17 @@
+// #define TEST_OUTPUT
+#define TEST_GAMEBOARD
+
 #include <iostream>
 
 #include "../include/characters.hpp"
 #include "../include/formats.hpp"
+#include "../include/GameBoard.hpp"
+
+GameBoard gb(4);
 
 int main()
 {
-
+#ifdef TEST_OUTPUT
     // Characters
     std::cout << FULLBLOCK << std::endl;
     std::cout << DARKSHADE << std::endl;
@@ -63,6 +69,12 @@ int main()
     std::cout << color("46", "Hello world!") << std::endl;
     std::cout << color("47", "Hello world!") << std::endl;
     std::cout << std::endl;
+#endif
+
+#ifdef TEST_GAMEBOARD
+    gb.show();
+    std::cout << std::endl;
+#endif
 
     return 0;
 }
