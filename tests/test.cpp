@@ -9,8 +9,6 @@
 #include "../include/formats.hpp"
 #include "../include/GameBoard.hpp"
 
-GameBoard gb(4);
-
 int main()
 {
 
@@ -77,13 +75,32 @@ int main()
 #endif
 
 #ifdef TEST_GAMEBOARD
-    gb.show();
-    std::cout << std::endl;
-
-    for (int i = 0; i < 5; i++)
+    GameBoard gb(4);
+    while (true)
     {
         gb.generate_new();
         gb.show();
+        std::cout << std::endl;
+        std::cout << "1 - Up; 2 - Right; 3 - Down; 4 - Left. Choose your option." << std::endl;
+        int opt = 0;
+        std::cin >> opt;
+        switch (opt)
+        {
+        case 1:
+            gb.move_up();
+            break;
+        case 2:
+            gb.move_right();
+            break;
+        case 3:
+            gb.move_down();
+            break;
+        case 4:
+            gb.move_left();
+            break;
+        default:
+            break;
+        }
         std::cout << std::endl;
     }
 #endif

@@ -21,4 +21,8 @@ public:
     // Game logic
     void generate_new();
     bool is_full();
+    void move_up();
+    void move_right();
+    void move_down();
+    void move_left();
 };
