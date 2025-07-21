@@ -1,5 +1,6 @@
 // #define TEST_OUTPUT
-#define TEST_GAMEBOARD
+// #define TEST_GAMEBOARD
+#define TEST_GETCH
 
 #include <cstdlib>
 #include <ctime>
@@ -8,6 +9,7 @@
 #include "../include/characters.hpp"
 #include "../include/formats.hpp"
 #include "../include/GameBoard.hpp"
+#include "../include/getkey.hpp"
 
 int main()
 {
@@ -102,6 +104,14 @@ int main()
             break;
         }
         std::cout << std::endl;
+    }
+#endif
+
+#ifdef TEST_GETCH
+    while (true)
+    {
+        int t = getkey();
+        std::cout << "Your input unicode: " << t << std::endl;
     }
 #endif
 
