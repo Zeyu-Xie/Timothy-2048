@@ -7,14 +7,70 @@
 GameBoard::GameBoard(int n) : N(n), array(n, VINT(n, 0)) {}
 
 // Class method
+std::string _center(int x, int l)
+{
+    std::string str = x > 0 ? std::to_string(x) : " ";
+    int total_width = l;
+    int pad = total_width - str.length();
+    int pad_left = pad / 2;
+    int pad_right = pad - pad_left;
+    return std::string(pad_left, ' ') + str + std::string(pad_right, ' ');
+}
 void GameBoard::show()
 {
+    // Top line
+    std::string top_line = "\u250C";
+    for (int i = 0; i < N - 1; i++)
+        top_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C";
+    top_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510";
+
+    // Middle line
+    std::string middle_line = "\u251C";
+    for (int i = 0; i < N - 1; i++)
+        middle_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C";
+    middle_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524";
+
+    // Bottom line
+    std::string bottom_line = "\u2514";
+    for (int i = 0; i < N - 1; i++)
+        bottom_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534";
+    bottom_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518";
+
+    // Space line
+    std::string space_line = "\u2502";
     for (int i = 0; i < N; i++)
+        space_line += "       \u2502";
+
+    // Draw the first row
+    std::cout << top_line << std::endl;
+    std::cout << space_line << std::endl;
+    std::cout << "\u2502";
+    for (int j = 0; j < N; j++)
+        std::cout << _center(array[0][j], 7) << "\u2502";
+    std::cout << std::endl;
+    std::cout << space_line << std::endl;
+
+    // Draw the middle rows
+    for (int i = 1; i < N - 1; i++)
     {
+        std::cout << middle_line << std::endl;
+        std::cout << space_line << std::endl;
+        std::cout << "\u2502";
         for (int j = 0; j < N; j++)
-            std::cout << std::right << std::setw(5) << array[i][j] << " ";
+            std::cout << _center(array[i][j], 7) << "\u2502";
         std::cout << std::endl;
+        std::cout << space_line << std::endl;
     }
+
+    // Draw the last row
+    std::cout << middle_line << std::endl;
+    std::cout << space_line << std::endl;
+    std::cout << "\u2502";
+    for (int j = 0; j < N; j++)
+        std::cout << _center(array[N - 1][j], 7) << "\u2502";
+    std::cout << std::endl;
+    std::cout << space_line << std::endl;
+    std::cout << bottom_line << std::endl;
 }
 
 // Game logic
