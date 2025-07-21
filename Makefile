@@ -2,7 +2,7 @@ BUILD_DIR = build
 SRC_DIR = src
 TEST_DIR = tests
 CXX = clang++
-CXXFLAGS = -Wall -O2 -MMD -MP
+CXXFLAGS = -Wall -O2 -MMD -MP -std=c++23
 
 TARGET = $(BUILD_DIR)/main
 TEST_TARGET = $(BUILD_DIR)/test

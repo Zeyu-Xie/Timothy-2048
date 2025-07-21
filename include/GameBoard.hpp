@@ -12,6 +12,13 @@ private:
     VVINT array;
 
 public:
+    // Constructor
     GameBoard(int n);
+
+    // Class method
     void show();
+
+    // Game logic
+    void generate_new();
+    bool is_full();
 };

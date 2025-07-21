@@ -1,6 +1,8 @@
 // #define TEST_OUTPUT
 #define TEST_GAMEBOARD
 
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 #include "../include/characters.hpp"
@@ -11,6 +13,9 @@ GameBoard gb(4);
 
 int main()
 {
+
+    std::srand(std::time(nullptr));
+
 #ifdef TEST_OUTPUT
     // Characters
     std::cout << FULLBLOCK << std::endl;
@@ -74,6 +79,13 @@ int main()
 #ifdef TEST_GAMEBOARD
     gb.show();
     std::cout << std::endl;
+
+    for (int i = 0; i < 5; i++)
+    {
+        gb.generate_new();
+        gb.show();
+        std::cout << std::endl;
+    }
 #endif
 
     return 0;
