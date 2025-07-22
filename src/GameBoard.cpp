@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iomanip>
 #include <tuple>
 
@@ -8,14 +9,14 @@
 GameBoard::GameBoard(int n) : N(n), step(0), array(n, VINT(n, 0)) {}
 
 // Class method
-std::string _center(int x, int l)
+std::string _center_colored(int x, int l)
 {
     std::string str = x > 0 ? std::to_string(x) : " ";
     int total_width = l;
     int pad = total_width - str.length();
     int pad_left = pad / 2;
     int pad_right = pad - pad_left;
-    return std::string(pad_left, ' ') + str + std::string(pad_right, ' ');
+    return std::string(pad_left, ' ') + bold(color_16_foreground(str, std::log2(x) - 1)) + std::string(pad_right, ' ');
 }
 void GameBoard::show()
 {
@@ -47,7 +48,7 @@ void GameBoard::show()
               << space_line << std::endl;
     std::cout << "\u2551";
     for (int j = 0; j < N; j++)
-        std::cout << _center(array[0][j], 7) << "\u2551";
+        std::cout << _center_colored(array[0][j], 7) << "\u2551";
     std::cout << std::endl
               << space_line << std::endl;
 
@@ -58,7 +59,7 @@ void GameBoard::show()
                   << space_line << std::endl;
         std::cout << "\u2551";
         for (int j = 0; j < N; j++)
-            std::cout << _center(array[i][j], 7) << "\u2551";
+            std::cout << _center_colored(array[i][j], 7) << "\u2551";
         std::cout << std::endl
                   << space_line << std::endl;
     }
@@ -68,14 +69,14 @@ void GameBoard::show()
               << space_line << std::endl;
     std::cout << "\u2551";
     for (int j = 0; j < N; j++)
-        std::cout << _center(array[N - 1][j], 7) << "\u2551";
+        std::cout << _center_colored(array[N - 1][j], 7) << "\u2551";
     std::cout << std::endl;
     std::cout << space_line << std::endl
               << bottom_line << std::endl;
 
     // Print the data
     std::cout << std::endl
-              << "Steps: " << bold(std::to_string(step)) << std::endl
+              << color_256_background("> Steps: " + std::to_string(step) + " <", 184) << std::endl
               << std::endl;
 }
 

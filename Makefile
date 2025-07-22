@@ -13,7 +13,7 @@ SRC_OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRC))
 TEST_SRC = $(wildcard $(TEST_DIR)/*.cpp)
 TEST_OBJ = $(patsubst $(TEST_DIR)/%.cpp,$(BUILD_DIR)/%.test.o,$(TEST_SRC))
 
-# src/main.cpp 特例化，单独提取出来
+# src/main.cpp
 MAIN_OBJ = $(BUILD_DIR)/main.o
 MODULE_OBJ = $(filter-out $(MAIN_OBJ), $(SRC_OBJ))
 

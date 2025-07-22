@@ -84,7 +84,7 @@ int main()
               << " \033[0;1;31;91m\u2580\033[0;1;33;93m\u2580\u2580\033[0;1;32;92m\u2580\u2580\033[0;1;36;96m\u2580\u2580\033[0;1;34;94m\u2580\033[0m    \033[0;1;31;91m\u2580\033[0;1;33;93m\u2580\u2580\033[0;1;32;92m\u2580\033[0m         \033[0;1;33;93m\u2580\u2580\033[0m     \033[0;1;34;94m\u2580\033[0;1;35;95m\u2580\u2580\033[0;1;31;91m\u2580\033[0m" << std::endl
               << std::endl
               << std::endl
-              << bold(color("33", "Welcome to Timothy-2048. \u00A9 Zeyu Xie.")) << std::endl
+              << bold(color_16_foreground("Welcome to Timothy-2048. \u00A9 Zeyu Xie.", 3)) << std::endl
               << std::flush;
     sleep(3);
     clear_console();

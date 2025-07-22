@@ -1,6 +1,6 @@
 // #define TEST_OUTPUT
 // #define TEST_GAMEBOARD
-#define TEST_GETCH
+// #define TEST_GETCH
 
 #include <cstdlib>
 #include <ctime>
@@ -53,27 +53,24 @@ int main()
     std::cout << underline("Hello world!") << std::endl;
     std::cout << std::endl;
 
-    // Color - foreground
-    std::cout << color("30", "Hello world!") << std::endl;
-    std::cout << color("31", "Hello world!") << std::endl;
-    std::cout << color("32", "Hello world!") << std::endl;
-    std::cout << color("33", "Hello world!") << std::endl;
-    std::cout << color("34", "Hello world!") << std::endl;
-    std::cout << color("35", "Hello world!") << std::endl;
-    std::cout << color("36", "Hello world!") << std::endl;
-    std::cout << color("37", "Hello world!") << std::endl;
+    // Color 16
+    for (int code = 0; code < 16; code++)
+        std::cout << color_16_foreground("Hello world!", code) << " " << color_16_background("Hello world!", code) << std::endl;
     std::cout << std::endl;
 
-    // Color - background
-    std::cout << color("40", "Hello world!") << std::endl;
-    std::cout << color("41", "Hello world!") << std::endl;
-    std::cout << color("42", "Hello world!") << std::endl;
-    std::cout << color("43", "Hello world!") << std::endl;
-    std::cout << color("44", "Hello world!") << std::endl;
-    std::cout << color("45", "Hello world!") << std::endl;
-    std::cout << color("46", "Hello world!") << std::endl;
-    std::cout << color("47", "Hello world!") << std::endl;
+    // Color 256
+    for (int code = 0; code < 256; code++)
+        std::cout << color_256_foreground("Hello world!", code) << " " << color_256_background("Hello world!", code) << std::endl;
     std::cout << std::endl;
+
+    // Color RGB
+    for (int r_code = 0; r_code < 256; r_code += 16)
+        for (int g_code = 0; g_code < 256; g_code += 16)
+            for (int b_code = 0; b_code < 256; b_code += 16)
+                std::cout << color_rgb_foreground("Hello world!", r_code, g_code, b_code) << " "
+                          << color_rgb_background("Hello world!", r_code, g_code, b_code) << std::endl;
+    std::cout << std::endl;
+
 #endif
 
 #ifdef TEST_GAMEBOARD
