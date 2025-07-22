@@ -97,8 +97,9 @@ bool GameBoard::is_full()
     return true;
 }
 
-void GameBoard::move_up()
+bool GameBoard::move_up()
 {
+    bool moved = false;
     for (int col = 0; col < N; ++col)
     {
         int last_merge_row = -1;
@@ -112,19 +113,23 @@ void GameBoard::move_up()
                 array[target - 1][col] = array[target][col];
                 array[target][col] = 0;
                 --target;
+                moved = true;
             }
             if (target > 0 && array[target - 1][col] == array[target][col] && last_merge_row != target - 1)
             {
                 array[target - 1][col] *= 2;
                 array[target][col] = 0;
                 last_merge_row = target - 1;
+                moved = true;
             }
         }
     }
+    return moved;
 }
 
-void GameBoard::move_right()
+bool GameBoard::move_right()
 {
+    bool moved = false;
     for (int row = 0; row < N; ++row)
     {
         int last_merge_col = N;
@@ -138,19 +143,23 @@ void GameBoard::move_right()
                 array[row][target + 1] = array[row][target];
                 array[row][target] = 0;
                 ++target;
+                moved = true;
             }
             if (target < N - 1 && array[row][target + 1] == array[row][target] && last_merge_col != target + 1)
             {
                 array[row][target + 1] *= 2;
                 array[row][target] = 0;
                 last_merge_col = target + 1;
+                moved = true;
             }
         }
     }
+    return moved;
 }
 
-void GameBoard::move_down()
+bool GameBoard::move_down()
 {
+    bool moved = false;
     for (int col = 0; col < N; ++col)
     {
         int last_merge_row = N;
@@ -164,19 +173,23 @@ void GameBoard::move_down()
                 array[target + 1][col] = array[target][col];
                 array[target][col] = 0;
                 ++target;
+                moved = true;
             }
             if (target < N - 1 && array[target + 1][col] == array[target][col] && last_merge_row != target + 1)
             {
                 array[target + 1][col] *= 2;
                 array[target][col] = 0;
                 last_merge_row = target + 1;
+                moved = true;
             }
         }
     }
+    return moved;
 }
 
-void GameBoard::move_left()
+bool GameBoard::move_left()
 {
+    bool moved = false;
     for (int row = 0; row < N; ++row)
     {
         int last_merge_col = -1;
@@ -190,13 +203,16 @@ void GameBoard::move_left()
                 array[row][target - 1] = array[row][target];
                 array[row][target] = 0;
                 --target;
+                moved = true;
             }
             if (target > 0 && array[row][target - 1] == array[row][target] && last_merge_col != target - 1)
             {
                 array[row][target - 1] *= 2;
                 array[row][target] = 0;
                 last_merge_col = target - 1;
+                moved = true;
             }
         }
     }
+    return moved;
 }

@@ -45,16 +45,16 @@ int game()
             switch (opt)
             {
             case -1:
-                gb.move_up();
+                is_legal = gb.move_up();
                 break;
             case -2:
-                gb.move_right();
+                is_legal = gb.move_right();
                 break;
             case -3:
-                gb.move_down();
+                is_legal = gb.move_down();
                 break;
             case -4:
-                gb.move_left();
+                is_legal = gb.move_left();
                 break;
             default:
                 is_legal = false;
