@@ -10,6 +10,7 @@ class GameBoard
 {
 private:
     int N;
+    int step;
     VVINT array;
 
 public:

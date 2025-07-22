@@ -63,10 +63,7 @@ int game()
 
             // If legal key pressed
             if (is_legal)
-            {
-                steps++;
                 break;
-            }
         }
     }
 

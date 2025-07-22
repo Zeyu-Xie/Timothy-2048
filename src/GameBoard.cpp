@@ -2,9 +2,10 @@
 #include <tuple>
 
 #include "../include/GameBoard.hpp"
+#include "../include/formats.hpp"
 
 // Constructor
-GameBoard::GameBoard(int n) : N(n), array(n, VINT(n, 0)) {}
+GameBoard::GameBoard(int n) : N(n), step(0), array(n, VINT(n, 0)) {}
 
 // Class method
 std::string _center(int x, int l)
@@ -19,58 +20,63 @@ std::string _center(int x, int l)
 void GameBoard::show()
 {
     // Top line
-    std::string top_line = "\u250C";
+    std::string top_line = "\u2554";
     for (int i = 0; i < N - 1; i++)
-        top_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C";
-    top_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510";
+        top_line += "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2566";
+    top_line += "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557";
 
     // Middle line
-    std::string middle_line = "\u251C";
+    std::string middle_line = "\u2560";
     for (int i = 0; i < N - 1; i++)
-        middle_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C";
-    middle_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524";
+        middle_line += "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u256C";
+    middle_line += "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563";
 
     // Bottom line
-    std::string bottom_line = "\u2514";
+    std::string bottom_line = "\u255A";
     for (int i = 0; i < N - 1; i++)
-        bottom_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534";
-    bottom_line += "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518";
+        bottom_line += "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2569";
+    bottom_line += "\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D";
 
     // Space line
-    std::string space_line = "\u2502";
+    std::string space_line = "\u2551";
     for (int i = 0; i < N; i++)
-        space_line += "       \u2502";
+        space_line += "       \u2551";
 
     // Draw the first row
-    std::cout << top_line << std::endl;
-    std::cout << space_line << std::endl;
-    std::cout << "\u2502";
+    std::cout << top_line << std::endl
+              << space_line << std::endl;
+    std::cout << "\u2551";
     for (int j = 0; j < N; j++)
-        std::cout << _center(array[0][j], 7) << "\u2502";
-    std::cout << std::endl;
-    std::cout << space_line << std::endl;
+        std::cout << _center(array[0][j], 7) << "\u2551";
+    std::cout << std::endl
+              << space_line << std::endl;
 
     // Draw the middle rows
     for (int i = 1; i < N - 1; i++)
     {
-        std::cout << middle_line << std::endl;
-        std::cout << space_line << std::endl;
-        std::cout << "\u2502";
+        std::cout << middle_line << std::endl
+                  << space_line << std::endl;
+        std::cout << "\u2551";
         for (int j = 0; j < N; j++)
-            std::cout << _center(array[i][j], 7) << "\u2502";
-        std::cout << std::endl;
-        std::cout << space_line << std::endl;
+            std::cout << _center(array[i][j], 7) << "\u2551";
+        std::cout << std::endl
+                  << space_line << std::endl;
     }
 
     // Draw the last row
-    std::cout << middle_line << std::endl;
-    std::cout << space_line << std::endl;
-    std::cout << "\u2502";
+    std::cout << middle_line << std::endl
+              << space_line << std::endl;
+    std::cout << "\u2551";
     for (int j = 0; j < N; j++)
-        std::cout << _center(array[N - 1][j], 7) << "\u2502";
+        std::cout << _center(array[N - 1][j], 7) << "\u2551";
     std::cout << std::endl;
-    std::cout << space_line << std::endl;
-    std::cout << bottom_line << std::endl;
+    std::cout << space_line << std::endl
+              << bottom_line << std::endl;
+
+    // Print the data
+    std::cout << std::endl
+              << "Steps: " << bold(std::to_string(step)) << std::endl
+              << std::endl;
 }
 
 // Game logic
@@ -124,6 +130,8 @@ bool GameBoard::move_up()
             }
         }
     }
+    if (moved)
+        step++;
     return moved;
 }
 
@@ -154,6 +162,8 @@ bool GameBoard::move_right()
             }
         }
     }
+    if (moved)
+        step++;
     return moved;
 }
 
@@ -184,6 +194,8 @@ bool GameBoard::move_down()
             }
         }
     }
+    if (moved)
+        step++;
     return moved;
 }
 
@@ -214,5 +226,7 @@ bool GameBoard::move_left()
             }
         }
     }
+    if (moved)
+        step++;
     return moved;
 }
