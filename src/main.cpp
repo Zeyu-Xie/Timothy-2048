@@ -1,5 +1,7 @@
 #define CLEAR_CONSOLE
 
+#define VERSION "1.0.1"
+
 #include <cstdlib>
 #include <ctime>
 #include <unistd.h>
@@ -12,6 +14,22 @@
 
 const int N = 4;
 GameBoard gb(N);
+
+void help()
+{
+    std::cout << "timothy-2048 - A simple terminal 2048 game by Zeyu Xie\n\n"
+              << "Usage:\n"
+              << "  timothy-2048 [options]\n\n"
+              << "Without any options, the game starts immediately with default settings.\n\n"
+              << "Options:\n"
+              << "  -h, --help              Show this help message and exit\n"
+              << "  -v, --version           Show version information and exit\n\n"
+              << "Examples:\n"
+              << "  timothy-2048                Start game with default 4x4 board\n"
+              << "  timothy-2048 --help         Show help message\n"
+              << "  timothy-2048 --version      Show version information\n\n"
+              << "Enjoy the game!\n";
+}
 
 int game()
 {
@@ -74,8 +92,25 @@ int game()
     return step;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+
+    // Special commands
+    if (argc > 1)
+    {
+        std::string arg = argv[1];
+        if (arg == "--help" || arg == "-h")
+        {
+            help();
+            return 0;
+        }
+        else if (arg == "--version" || arg == "-v")
+        {
+            std::cout << "Timothy 2048 version " << VERSION << "\n";
+            return 0;
+        }
+    }
+
     // Program start animation
 #ifdef CLEAR_CONSOLE
     clear_console();
