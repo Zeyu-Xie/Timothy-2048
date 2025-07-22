@@ -14,11 +14,13 @@ private:
     VVINT array;
 
 public:
-    // Constructor
+    // Constructors
     GameBoard(int n);
+    GameBoard(int n, int step, VVINT array);
 
     // Class method
     void show();
+    int get_step();
 
     // Game logic
     void generate_new();

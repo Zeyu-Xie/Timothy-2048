@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iomanip>
+#include <map>
 #include <tuple>
 
 #include "../include/GameBoard.hpp"
@@ -7,8 +8,14 @@
 
 // Constructor
 GameBoard::GameBoard(int n) : N(n), step(0), array(n, VINT(n, 0)) {}
+GameBoard::GameBoard(int n, int step, VVINT array) : N(n), step(step), array(array) {}
 
 // Class method
+const std::map<int, int> value_colors = {{2, 124}, {4, 160}, {8, 196}, {16, 202}, {32, 208}, {64, 214}, {128, 220}, {256, 226}, {512, 190}, {1024, 154}, {2048, 118}, {4096, 82}, {8192, 51}, {16384, 45}, {32768, 39}, {65536, 33}, {131072, 27}};
+inline int _value_to_color(int x)
+{
+    return value_colors.at(x);
+}
 std::string _center_colored(int x, int l)
 {
     std::string str = x > 0 ? std::to_string(x) : " ";
@@ -16,7 +23,7 @@ std::string _center_colored(int x, int l)
     int pad = total_width - str.length();
     int pad_left = pad / 2;
     int pad_right = pad - pad_left;
-    return std::string(pad_left, ' ') + bold(color_16_foreground(str, std::log2(x) - 1)) + std::string(pad_right, ' ');
+    return x > 0 ? std::string(pad_left, ' ') + bold(color_256_foreground(str, _value_to_color(x))) + std::string(pad_right, ' ') : std::string(pad_left, ' ') + str + std::string(pad_right, ' ');
 }
 void GameBoard::show()
 {
@@ -80,6 +87,11 @@ void GameBoard::show()
               << std::endl;
 }
 
+int GameBoard::get_step()
+{
+    return step;
+}
+
 // Game logic
 void GameBoard::generate_new()
 {
@@ -99,8 +111,16 @@ bool GameBoard::is_full()
 {
     for (int i = 0; i < N; i++)
         for (int j = 0; j < N; j++)
-            if (!array[i][j])
+        {
+            if (array[i][j] == 0)
                 return false;
+            // Right
+            if (j + 1 < N && array[i][j] == array[i][j + 1])
+                return false;
+            // Down
+            if (i + 1 < N && array[i][j] == array[i + 1][j])
+                return false;
+        }
     return true;
 }
 

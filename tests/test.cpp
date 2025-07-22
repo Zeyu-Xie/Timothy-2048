@@ -1,6 +1,8 @@
 // #define TEST_OUTPUT
-// #define TEST_GAMEBOARD
+// #define TEST_GAMEBOARD_1
 // #define TEST_GETCH
+// #define TEST_GAMEBOARD_2
+// #define TEST_VVINT
 
 #include <cstdlib>
 #include <ctime>
@@ -73,7 +75,7 @@ int main()
 
 #endif
 
-#ifdef TEST_GAMEBOARD
+#ifdef TEST_GAMEBOARD_1
     GameBoard gb(4);
     while (true)
     {
@@ -109,6 +111,38 @@ int main()
     {
         int t = getkey();
         std::cout << "Your input unicode: " << t << std::endl;
+    }
+#endif
+
+#ifdef TEST_GAMEBOARD_2
+
+    GameBoard gb_0(4);
+    GameBoard gb_1(4, 35, {{0, 2, 0, 0}, {0, 0, 4, 0}, {2, 2, 32, 8}, {4, 4, 8, 16}});
+    GameBoard gb_2(4, 8818, {{0, 2, 0, 0}, {0, 0, 4, 0}, {2, 2, 32, 8}, {4, 4, 2048, 16384}});
+    GameBoard gb_3(4, 124514, {{4, 8, 16, 32}, {512, 256, 128, 64}, {1024, 2048, 4096, 8192}, {131072, 65536, 32768, 16384}});
+
+    gb_0.show();
+    gb_1.show();
+    gb_2.show();
+    gb_3.show();
+
+#endif
+
+#ifdef TEST_VVINT
+    VVINT vvint_1 = {{1, 2}, {3, 4}};
+    VVINT vvint_2 = vvint_1;
+    vvint_2[0][0] = 0;
+    for (auto i : vvint_1)
+    {
+        for (auto j : i)
+            std::cout << j << " ";
+        std::cout << std::endl;
+    }
+    for (auto i : vvint_2)
+    {
+        for (auto j : i)
+            std::cout << j << " ";
+        std::cout << std::endl;
     }
 #endif
 
