@@ -1,14 +1,18 @@
 #include <cmath>
+#include <fstream>
 #include <iomanip>
 #include <map>
 #include <tuple>
 
-#include "../include/GameBoard.hpp"
 #include "../include/formats.hpp"
+#include "../include/GameBoard.hpp"
+#include "../include/json.hpp"
+
+using json = nlohmann::json;
 
 // Constructor
-GameBoard::GameBoard(int n) : N(n), step(0), array(n, VINT(n, 0)) {}
-GameBoard::GameBoard(int n, int step, VVINT array) : N(n), step(step), array(array) {}
+GameBoard::GameBoard(int n) : N(n), step(0), operations({}), array(n, VINT(n, 0)) {}
+GameBoard::GameBoard(int n, int step, VINT operations, VVINT array) : N(n), step(step), operations(operations), array(array) {}
 
 // Class method
 const std::map<int, int> value_colors = {{2, 124}, {4, 160}, {8, 196}, {16, 202}, {32, 208}, {64, 214}, {128, 220}, {256, 226}, {512, 190}, {1024, 154}, {2048, 118}, {4096, 82}, {8192, 51}, {16384, 45}, {32768, 39}, {65536, 33}, {131072, 27}};
@@ -250,4 +254,37 @@ bool GameBoard::move_left()
     if (moved)
         step++;
     return moved;
+}
+
+// Files
+void GameBoard::export_saving(std::string destination)
+{
+    json saving;
+
+    saving["N"] = N;
+    saving["step"] = step;
+    saving["operations"] = operations;
+    saving["array"] = array;
+
+    std::ofstream file(destination);
+    file << saving.dump();
+    file.close();
+}
+void GameBoard::import_saving(std::string destination)
+{
+    std::ifstream file(destination);
+    if (!file.is_open())
+    {
+        std::cerr << "Failed to open file: " << destination << "\n";
+        return;
+    }
+
+    json saving;
+    file >> saving;
+    file.close();
+
+    N = saving["N"];
+    step = saving["step"];
+    operations = saving["operations"].get<VINT>();
+    array = saving["array"].get<VVINT>();
 }

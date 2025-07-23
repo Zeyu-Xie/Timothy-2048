@@ -11,12 +11,13 @@ class GameBoard
 private:
     int N;
     int step;
+    VINT operations;
     VVINT array;
 
 public:
     // Constructors
     GameBoard(int n);
-    GameBoard(int n, int step, VVINT array);
+    GameBoard(int n, int step, VINT operations, VVINT array);
 
     // Class method
     void show();
@@ -29,4 +30,8 @@ public:
     bool move_right();
     bool move_down();
     bool move_left();
+
+    // Files
+    void export_saving(std::string destination);
+    void import_saving(std::string destination);
 };
