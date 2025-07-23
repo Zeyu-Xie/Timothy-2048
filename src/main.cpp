@@ -98,7 +98,7 @@ void game()
             case -4:
                 is_continue_key = gb.move_left();
                 break;
-            // Others
+            // Others (break: ❌)
             default:
                 break;
             }
@@ -121,18 +121,32 @@ void game()
 // Show help page
 void help()
 {
-    std::cout << "timothy-2048 - A simple terminal 2048 game by Zeyu Xie\n\n"
+    std::cout << "timothy-2048 - A colorful terminal 2048 game by Zeyu Xie\n\n"
               << "Usage:\n"
               << "  timothy-2048 [options]\n\n"
-              << "Without any options, the game starts immediately with default settings.\n\n"
+              << "Description:\n"
+              << "  This is a simple yet visually enhanced version of the classic 2048 game\n"
+              << "  playable in the terminal. Save and load game states, enjoy colorful\n"
+              << "  animations, and use arrow keys to merge numbers until 2048!\n\n"
               << "Options:\n"
-              << "  -h, --help              Show this help message and exit\n"
-              << "  -v, --version           Show version information and exit\n\n"
+              << "  -h, --help                 Show this help message and exit\n"
+              << "  -v, --version              Show version information and exit\n"
+              << "  -i, --import <file>        Import a saved game state from a JSON file\n"
+              << "  -o, --output <file>        Automatically export the game state on quit\n\n"
               << "Examples:\n"
-              << "  timothy-2048                Start game with default 4x4 board\n"
-              << "  timothy-2048 --help         Show help message\n"
-              << "  timothy-2048 --version      Show version information\n\n"
-              << "Enjoy the game!\n";
+              << "  timothy-2048\n"
+              << "      Start the game with a 4x4 board and default settings\n\n"
+              << "  timothy-2048 --import save.json\n"
+              << "      Resume the game from save.json\n\n"
+              << "  timothy-2048 -i save.json -o final.json\n"
+              << "      Import from save.json and export to final.json on exit\n\n"
+              << "  timothy-2048 --version\n"
+              << "      Show the game version\n\n"
+              << "Controls:\n"
+              << "  Arrow keys       Move tiles (Up, Right, Down, Left)\n"
+              << "  S / s            Save the game interactively\n"
+              << "  Q / q            Quit the game\n\n"
+              << "Enjoy the game! For feedback, contact: xie.zeyu20@gmail.com\n";
 }
 
 // Display start animation
