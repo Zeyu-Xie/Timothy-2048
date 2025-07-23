@@ -28,16 +28,22 @@ void game()
     int N = 4;
     GameBoard gb(N);
     int step;
+    bool generate_new_signal = true;
 
     // Import
-    if (IMPORT)
+    if (IMPORT) {
         gb.import_saving(IMPORT_PATH);
+        generate_new_signal = false;
+    }
 
     // Game loop
     while (true)
     {
         // Generate new
-        gb.generate_new();
+        if(generate_new_signal)
+            gb.generate_new();
+        else
+            generate_new_signal = true;
 
         // Clear the console
 #ifdef CLEAR_CONSOLE
