@@ -9,8 +9,8 @@
 #include "../include/characters.hpp"
 #include "../include/clearConsole.hpp"
 #include "../include/GameBoard.hpp"
-#include "../include/getkey.hpp"
 #include "../include/formats.hpp"
+#include "../include/utils.hpp"
 
 // Arguments
 bool SHOW_HELP = false;
@@ -31,7 +31,8 @@ void game()
     bool generate_new_signal = true;
 
     // Import
-    if (IMPORT) {
+    if (IMPORT)
+    {
         gb.import_saving(IMPORT_PATH);
         generate_new_signal = false;
     }
@@ -39,8 +40,10 @@ void game()
     // Game loop
     while (true)
     {
+        bool quit = false;
+
         // Generate new
-        if(generate_new_signal)
+        if (generate_new_signal)
             gb.generate_new();
         else
             generate_new_signal = true;
@@ -62,34 +65,52 @@ void game()
         }
 
         // Operation
-        int opt = 0;
         while (true)
         {
-            opt = getkey();
-            bool is_legal = true;
+            int opt = getkey();
+            bool is_continue_key = false;
             switch (opt)
             {
+            // `Q` or `q` (break: ✅)
+            case 81:
+            case 113:
+                is_continue_key = true;
+                quit = true;
+                break;
+            // `S` or `s` (break: ❌)
+            case 83:
+            case 115:
+                gb.export_saving(input("Output path: "));
+                break;
+            // Up (break: ❓)
             case -1:
-                is_legal = gb.move_up();
+                is_continue_key = gb.move_up();
                 break;
+            // Right (break: ❓)
             case -2:
-                is_legal = gb.move_right();
+                is_continue_key = gb.move_right();
                 break;
+            // Down (break: ❓)
             case -3:
-                is_legal = gb.move_down();
+                is_continue_key = gb.move_down();
                 break;
+            // Left (break: ❓)
             case -4:
-                is_legal = gb.move_left();
+                is_continue_key = gb.move_left();
                 break;
+            // Others
             default:
-                is_legal = false;
                 break;
             }
 
-            // If legal key pressed
-            if (is_legal)
+            // If illegal operation
+            if (is_continue_key)
                 break;
         }
+
+        // If quit signal
+        if (quit)
+            break;
     }
 
     // Output

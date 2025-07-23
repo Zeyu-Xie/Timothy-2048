@@ -2,7 +2,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "../include/getkey.hpp"
+#include "../include/utils.hpp"
 
 int getkey()
 {
@@ -67,4 +67,12 @@ int getkey()
     if (more == 3)
         return ((buf[0] & 0x07) << 18) | ((buf[1] & 0x3F) << 12) | ((buf[2] & 0x3F) << 6) | (buf[3] & 0x3F);
     return -100;
+}
+
+std::string input(std::string indicator)
+{
+    std::string s;
+    std::cout << indicator;
+    std::cin >> s;
+    return s;
 }
