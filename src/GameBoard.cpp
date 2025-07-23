@@ -155,8 +155,10 @@ bool GameBoard::move_up()
             }
         }
     }
-    if (moved)
-        step++;
+    if (moved) {
+        step ++;
+        operations.push_back(-1);
+    }
     return moved;
 }
 
@@ -187,8 +189,10 @@ bool GameBoard::move_right()
             }
         }
     }
-    if (moved)
-        step++;
+    if (moved) {
+        step ++;
+        operations.push_back(-2);
+    }
     return moved;
 }
 
@@ -219,8 +223,10 @@ bool GameBoard::move_down()
             }
         }
     }
-    if (moved)
-        step++;
+    if (moved) {
+        step ++;
+        operations.push_back(-3);
+    }
     return moved;
 }
 
@@ -251,8 +257,10 @@ bool GameBoard::move_left()
             }
         }
     }
-    if (moved)
-        step++;
+    if (moved) {
+        step ++;
+        operations.push_back(-4);
+    }
     return moved;
 }
 
